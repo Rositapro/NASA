@@ -31,6 +31,7 @@
             dgvData = new DataGridView();
             btnSearch = new Button();
             cbMonth = new ComboBox();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvData).BeginInit();
             SuspendLayout();
             // 
@@ -64,11 +65,22 @@
             cbMonth.TabIndex = 2;
             cbMonth.SelectedIndexChanged += cbMonth_SelectedIndexChanged;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Yu Gothic UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(498, 24);
+            label1.Name = "label1";
+            label1.Size = new Size(208, 32);
+            label1.TabIndex = 3;
+            label1.Text = "Picture of the day";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1212, 659);
+            Controls.Add(label1);
             Controls.Add(cbMonth);
             Controls.Add(btnSearch);
             Controls.Add(dgvData);
@@ -76,6 +88,7 @@
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)dgvData).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -83,5 +96,6 @@
         private DataGridView dgvData;
         private Button btnSearch;
         private ComboBox cbMonth;
+        private Label label1;
     }
 }
