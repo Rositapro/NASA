@@ -1,4 +1,3 @@
-using System.Drawing.Text;
 using System.Text.Json;
 
 namespace ProyectoFinal4S
@@ -13,13 +12,13 @@ namespace ProyectoFinal4S
         {
             InitializeComponent();
             cbMonth.Items.AddRange(new string[]
-                {
-                     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-                     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-                });
+            {
+                "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+            });
             cbMonth.SelectedIndex = 0;
 
-
+            dgvData.CellContentClick += dgvData_CellContentClick;
         }
 
         private async void btnSearch_Click(object sender, EventArgs e)
@@ -52,6 +51,23 @@ namespace ProyectoFinal4S
                     dgvData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     dgvData.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
                     dgvData.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
+                    // Convertir columna "url" a tipo link
+                    if (dgvData.Columns["url"] is not DataGridViewLinkColumn)
+                    {
+                        int colIndex = dgvData.Columns["url"].Index;
+                        var linkCol = new DataGridViewLinkColumn
+                        {
+                            Name = "url",
+                            HeaderText = "Imagen",
+                            DataPropertyName = "url",
+                            UseColumnTextForLinkValue = false,
+                            LinkBehavior = LinkBehavior.SystemDefault
+                        };
+
+                        dgvData.Columns.Remove("url");
+                        dgvData.Columns.Insert(colIndex, linkCol);
+                    }
                 }
                 else
                 {
@@ -62,7 +78,29 @@ namespace ProyectoFinal4S
             {
                 MessageBox.Show("Error al obtener los datos: " + ex.Message);
             }
+        }
 
+        private void dgvData_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && dgvData.Columns[e.ColumnIndex].Name == "url")
+            {
+                var cellValue = dgvData.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString();
+                if (!string.IsNullOrEmpty(cellValue))
+                {
+                    try
+                    {
+                        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                        {
+                            FileName = cellValue,
+                            UseShellExecute = true
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("No se pudo abrir el enlace: " + ex.Message);
+                    }
+                }
+            }
         }
 
         public class ApodResponse
@@ -76,12 +114,7 @@ namespace ProyectoFinal4S
 
         private void cbMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void dgvData_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            // Opcional: lógica si necesitas algo al cambiar de mes
         }
     }
 }
