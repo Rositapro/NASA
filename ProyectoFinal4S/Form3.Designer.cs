@@ -28,17 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form3));
             btnAPI = new Button();
             btnDataSet = new Button();
+            notifyIcon1 = new NotifyIcon(components);
             SuspendLayout();
             // 
             // btnAPI
             // 
             btnAPI.Font = new Font("Yu Gothic", 11.25F);
-            btnAPI.Location = new Point(405, 116);
+            btnAPI.Location = new Point(544, 347);
+            btnAPI.Margin = new Padding(4, 5, 4, 5);
             btnAPI.Name = "btnAPI";
-            btnAPI.Size = new Size(124, 41);
+            btnAPI.Size = new Size(177, 68);
             btnAPI.TabIndex = 0;
             btnAPI.Text = "NASA API";
             btnAPI.UseVisualStyleBackColor = true;
@@ -47,22 +50,29 @@
             // btnDataSet
             // 
             btnDataSet.Font = new Font("Yu Gothic", 11.25F);
-            btnDataSet.Location = new Point(405, 183);
+            btnDataSet.Location = new Point(544, 444);
+            btnDataSet.Margin = new Padding(4, 5, 4, 5);
             btnDataSet.Name = "btnDataSet";
-            btnDataSet.Size = new Size(124, 36);
+            btnDataSet.Size = new Size(177, 60);
             btnDataSet.TabIndex = 1;
             btnDataSet.Text = "DATA SET";
             btnDataSet.UseVisualStyleBackColor = true;
             btnDataSet.Click += btnDataSet_Click;
             // 
+            // notifyIcon1
+            // 
+            notifyIcon1.Text = "notifyIcon1";
+            notifyIcon1.Visible = true;
+            // 
             // Form3
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(822, 475);
+            ClientSize = new Size(1174, 792);
             Controls.Add(btnDataSet);
             Controls.Add(btnAPI);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "Form3";
             Text = "Form3";
             ResumeLayout(false);
@@ -72,5 +82,6 @@
 
         private Button btnAPI;
         private Button btnDataSet;
+        private NotifyIcon notifyIcon1;
     }
 }
